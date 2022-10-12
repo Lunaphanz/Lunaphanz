@@ -1,0 +1,76 @@
+package test;
+//Complete the implementation of your MyArrayList class in this file
+import java.util.NoSuchElementException;
+
+public class MyArrayList implements MyList {
+ // Implement the required fields and methods here
+	private int currentCapacity = 8;
+	private int size = 0;
+	private Object[] storage = new Object[8];
+	
+	public void append(Object a) {
+		MyListIterator iter = getIterator();
+		while(!iter.hasNext()) {
+			
+		}
+	}
+	
+	public void insertAt(int index, Object value) {
+		if(index < 0 || index > size) {throw new NoSuchElementException();}
+		else {
+			if(size == currentCapacity) {makeCapacity(currentCapacity*2);}
+			storage[index] = value;
+		}
+	}
+	
+	public void removeAt(int a, Object b) {
+		makeCapacity(currentCapacity);
+	}
+	
+	public Object getAt(int a) {
+		return storage;
+	}
+	
+	public int getSize() {
+		return -1;
+	}
+	//Check this
+	public void makeCapacity(int minCapacity) {
+		if(minCapacity < size || minCapacity == currentCapacity) {return;}	
+		int temp = currentCapacity;
+		currentCapacity = (minCapacity > 8) ? minCapacity : 8; //set capacity either to eight or new capacity if larger
+		if(currentCapacity != temp) {
+			Object[] storage = new Object[currentCapacity]; //create new storage based on new capacity
+			for(int i = 0; i < this.storage.length; i++) {
+				storage[i] = this.storage[i];
+			}
+			this.storage = storage;
+		}
+	
+	}
+	
+	public void trimExcess() {
+		makeCapacity(size);
+	}
+
+ // Do not alter the code below 
+ @Override
+ public MyListIterator getIterator() {
+     return new MyArrayListIterator();
+ }
+ 
+ private class MyArrayListIterator implements MyListIterator {
+     int currentIndex = -1;
+
+     @Override
+     public Object next() {
+         ++currentIndex;
+         return storage[currentIndex];
+     }
+
+     @Override
+     public boolean hasNext() {
+         return currentIndex < size - 1;
+     }
+ }   
+}
