@@ -1,0 +1,88 @@
+package test;
+import java.util.NoSuchElementException;
+
+public class MyStack implements IStack {
+	// add any necessary variables here
+	private Node head = null;
+    private int size = 0;
+		
+	@Override
+	public void push(Object item) {
+		if (head == null) {
+			head.data = item;
+		}
+		else { 
+			Node pos = new Node();
+			pos.data = item;
+			pos.next = head;
+			head = pos;
+		}
+	}
+
+	@Override
+	public Object pop() {
+		if (head == null) {throw new NoSuchElementException();}
+		else {
+			Object temp = head.data;
+			head = head.next;
+			return temp;
+		}
+	}
+
+	@Override
+	public Object peek() {
+		if (head == null) {throw new NoSuchElementException();}
+		else {
+			return head.data;
+		}
+	}
+
+	@Override
+	public int indexOf(Object item) {
+		int count = 0;
+		pos 
+		while (pos)
+	}
+
+	@Override
+	public int getSize() {
+
+	}
+
+	@Override
+	public boolean isEmpty() {
+
+	}
+
+	// add any necessary methods or classes below
+	public MyListIterator getIterator() {
+		return new MyLinkedListIterator();
+	}
+	
+	private class MyLinkedListIterator implements MyListIterator {
+		Node currentNode = null;
+
+		@Override
+		public Object next() {
+			if (currentNode != null)
+				currentNode = currentNode.next;
+			else
+				currentNode = head;
+
+			return currentNode.data;
+		}
+
+		@Override
+		public boolean hasNext() {
+			if (currentNode != null)
+				return currentNode.next != null;
+			else
+				return head != null;
+		}
+	}
+	
+	class Node {
+		public Object data = null;
+		public Node next = null;
+	}
+}
