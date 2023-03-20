@@ -1,7 +1,7 @@
 public class MyBSTree<T extends Comparable <T>> implements ITree<T> {
     private Node root;
     int size = 0;
-    public void insert(T item) { //not done
+    public void insert(T item) { 
         if (root != null) {
         	root.insert(item);
         }else{
