@@ -1,0 +1,86 @@
+public class MyBSTree<T extends Comparable <T>> implements ITree<T> {
+    private Node root;
+    int size = 0;
+    public void insert(T item) { //not done
+        if (root != null) {
+        	root.insert(item);
+        }else{
+        	root = new Node(item);
+        	size++;
+        }
+    }
+
+    public boolean containsItem(T item) {
+    	return containsItem(root, item);
+    }
+    private boolean containsItem(Node root, T item){
+    	if(root == null) {
+    		return false;
+    	} else {
+    		if(root.data.compareTo(item) != 0) {
+        		if(root.data.compareTo(item) == 1) {
+        			return containsItem(root.left,item);
+        		}
+        		else {
+        			return containsItem(root.right,item);
+        		}
+        	}
+        	else {
+        		return true;
+        	}
+    	}
+    }
+
+    public int getSize() {
+    	return size;
+    }
+
+    public void printInOrder() {
+    	System.out.print(toString());
+    }
+
+    public String toString() {
+    	return toString(root);
+    }
+    private String toString(Node root) {
+    	String list ="";
+    	if (root == null) {
+    		return "";
+    	} 
+    	list += toString(root.left);
+    	list += String.valueOf(root.data)+ " ";
+    	list += toString(root.right);
+    	return list;
+    }
+
+    class Node{
+        public T data;
+        public Node left;
+        public Node right;
+
+        public Node(T data){
+            this.data = data;
+        }
+
+        public void insert(T item) {
+        	if (data.compareTo(item) != 0) {
+        		if (data.compareTo(item) == 1) {
+        			if (left != null) { left.insert(item);}
+        			else {
+        				left = new Node(item);
+        				size++;
+        				}
+        		} else {
+        			if (right != null) { right.insert(item);}
+        			else {
+        				right = new Node(item);
+        				size++;
+        				}
+        		}
+        	} else {
+        		return;
+        	}
+        	
+        }
+    }
+}
